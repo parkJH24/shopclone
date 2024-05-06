@@ -5,7 +5,7 @@ import { useState } from "react"
 import { ServerStyleSheet, StyleSheetManager } from "styled-components"
 import { GlobalStyle } from "./GlobalStyle"
 
-export const Registry = ({children} : {children : React.ReactNode})=>{
+export const Registry = ({children})=>{
     const [sheet] = useState(()=>new ServerStyleSheet())
 
     useServerInsertedHTML(()=>{
