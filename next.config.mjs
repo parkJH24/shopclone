@@ -4,7 +4,13 @@ const nextConfig = {
         styledComponents: true,
     },
     images : {
-        domains : ['firebasestorage.googleapis.com']
+        remotePatterns : [
+            {
+                protocol : 'https',
+                hostname : 'firebasestorage.googleapis.com',
+                pathname : '/v0/b/test-42761.appspot.com.appspot.com/o/**',
+            }
+        ]
     },
 
     // async redirects() {
