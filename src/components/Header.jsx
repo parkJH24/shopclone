@@ -1,35 +1,44 @@
-/*
-nextjs에서 styled component 사용
-yarn add styled-components
-yarn add babel-plugin-styled-components
-
-*/
 "use client"
-import { googleLogin } from "@/api/api";
+
 import Link from "next/link";
-import { useState } from "react";
 import styled from "styled-components";
-import LoginButton from "./LoginBtn";
+import LoginInfo from "./LoginInfo";
+import MainMenu from "./MainMenu";
+import { IoCartOutline } from "react-icons/io5";
+import { useAuthContext } from "@/context/authContext";
+import { googleLogin } from "@/api/api";
+import { CiSearch } from "react-icons/ci";
+
+
 
 export default function Header(){
-    const [user, setUser] = useState();
+    const {user} = useAuthContext()
 
-    const login = () =>{
-        googleLogin().then(setUser);
-    };
-
+    const handleCartClick = async (e)=>{
+        if(!user){
+            e.preventDefault();
+            googleLogin();
+        }
+    }
+    
     return(
         <HeaderContainer>
             <h1 className="logo">
                 <Link href='/'>shop</Link>
             </h1>
-            <div className='userWrap'>
-                <LoginButton onClick = {login}>login</LoginButton>
-            </div>
+            <MainMenu/>
+            <LoginInfo/>
+            <Link href='/cart' onClick={handleCartClick}><IoCartOutline /></Link>
+            <Link href='/search'><CiSearch /></Link>
         </HeaderContainer>
     )
 }
 
 const HeaderContainer = styled.header`
-    
+    width: 100%;
+    padding: 12px 24px;
+    box-sizing: border-box;
+    border-bottom: solid 1px gray;
+    display: flex;
+    justify-content: space-between;
 `
