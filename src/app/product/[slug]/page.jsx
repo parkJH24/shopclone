@@ -10,11 +10,14 @@ import CategorySlider from "@/components/CategorySlider";
 // import { useRouter } from "next/router";
 
 
-export default function CategoryPage() {
+export default function CategoryPage({ predefinedSlug }) {
     const pathName = usePathname();
 
-    const slug = pathName.split('/').pop();
-    console.log(slug)
+    const dsfaultSlug = pathName.split('/').pop();
+
+
+    // 페이지 URL에서 slug를 받거나, props로 전달된 predefinedSlug를 사용합니다.
+    const slug = predefinedSlug || dsfaultSlug;
 
     const [products, setProducts] = useState([]);
     const [randomImages, setRandomImages] = useState([]);

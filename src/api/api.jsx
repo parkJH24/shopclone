@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { getDatabase, ref as databeseRef, set, get, query, orderByChild, equalTo, remove, ref } from 'firebase/database';
 import { getDownloadURL, getStorage, ref as storageRef, uploadBytes } from 'firebase/storage';
 import { adminUser } from '@/service/admin';
@@ -228,6 +228,33 @@ export async function getSearchProducts(text){
     }
 }
 
+//이메일 회원가입
+
+export async function joinEmail(email, password, name){
+    const auth = getAuth();
+    try{
+        const userData = await createUserWithEmailAndPassword(auth, email, password);
+
+        const user = userData.user;
+        await updateProfile(user,{
+            displayName : name
+        })
+        await signOut(auth);
+        return {success : true}
+    }catch(error){
+        console.error(error)
+    }
+}
+
+//이메일 로그인
+export async function loginEmail(email, password){
+    try{
+        const userData = await signInWithEmailAndPassword(auth, email, password)
+        return userData.user
+    }catch(error){
+        console.error(error)
+    }
+}
 
 
 export { database }
