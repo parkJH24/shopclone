@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { Autoplay, EffectFade } from 'swiper';
+import { Autoplay, EffectFade } from 'swiper/modules';
 import 'swiper/css/effect-fade';
 
 export default function CategorySlider({ imgs }) {
