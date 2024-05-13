@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^5.2.2",
     "@tanstack/react-query": "^5.35.1",
     "babel-plugin-styled-components": "^2.1.4",
     "firebase": "^10.11.1",
